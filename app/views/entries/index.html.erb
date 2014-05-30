@@ -1,8 +1,9 @@
-<h1>Listing entries</h1>
+<h1 class="page-header">Entries by <%= current_user.username %></h1>
 
 <table>
   <thead>
     <tr>
+      <th>Username</th>
       <th>Recorded at</th>
       <th>Temperature</th>
       <th>Disturbed</th>
@@ -34,6 +35,7 @@
   <tbody>
     <% @entries.each do |entry| %>
       <tr>
+        <td><%= entry.user.username %></td>
         <td><%= entry.recorded_at %></td>
         <td><%= entry.temperature %></td>
         <td><%= entry.disturbed %></td>

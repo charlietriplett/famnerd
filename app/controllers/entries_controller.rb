@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.all
+    @entries = current_user.entries
   end
 
   # GET /entries/1
@@ -14,7 +14,7 @@ class EntriesController < ApplicationController
 
   # GET /entries/new
   def new
-    @entry = Entry.new
+    @entry = current_user.entries.new
   end
 
   # GET /entries/1/edit
@@ -24,7 +24,7 @@ class EntriesController < ApplicationController
   # POST /entries
   # POST /entries.json
   def create
-    @entry = Entry.new(entry_params)
+    @entry = current_user.entries.new(entry_params)
 
     respond_to do |format|
       if @entry.save
@@ -69,6 +69,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:recorded_at, :temperature, :disturbed, :intercourse, :protected, :cervix_firmness, :cervix_height, :cirvix_openness, :flow_type, :flow_volume, :ferning, :opk, :pregancy_test, :ovulatory_pain, :breast_tenderness, :breast_fullness, :alcohol, :cramps, :exercise, :travel, :ibuprofen, :tylenol, :multivitamin, :notes)
+      params.require(:entry).permit(:recorded_at, :temperature, :disturbed, :intercourse, :protected, :cervix_firmness, :cervix_height, :cirvix_openness, :flow_type, :flow_volume, :ferning, :opk, :pregancy_test, :ovulatory_pain, :breast_tenderness, :breast_fullness, :alcohol, :cramps, :exercise, :travel, :ibuprofen, :tylenol, :multivitamin, :notes, :user_id)
     end
 end
