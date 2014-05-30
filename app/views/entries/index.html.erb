@@ -1,0 +1,71 @@
+<h1>Listing entries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recorded at</th>
+      <th>Temperature</th>
+      <th>Disturbed</th>
+      <th>Intercourse</th>
+      <th>Protected</th>
+      <th>Cervix firmness</th>
+      <th>Cervix height</th>
+      <th>Cirvix openness</th>
+      <th>Flow type</th>
+      <th>Flow volume</th>
+      <th>Ferning</th>
+      <th>Opk</th>
+      <th>Pregancy test</th>
+      <th>Ovulatory pain</th>
+      <th>Breast tenderness</th>
+      <th>Breast fullness</th>
+      <th>Alcohol</th>
+      <th>Cramps</th>
+      <th>Exercise</th>
+      <th>Travel</th>
+      <th>Ibuprofen</th>
+      <th>Tylenol</th>
+      <th>Multivitamin</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td><%= entry.recorded_at %></td>
+        <td><%= entry.temperature %></td>
+        <td><%= entry.disturbed %></td>
+        <td><%= entry.intercourse %></td>
+        <td><%= entry.protected %></td>
+        <td><%= entry.cervix_firmness %></td>
+        <td><%= entry.cervix_height %></td>
+        <td><%= entry.cirvix_openness %></td>
+        <td><%= entry.flow_type %></td>
+        <td><%= entry.flow_volume %></td>
+        <td><%= entry.ferning %></td>
+        <td><%= entry.opk %></td>
+        <td><%= entry.pregancy_test %></td>
+        <td><%= entry.ovulatory_pain %></td>
+        <td><%= entry.breast_tenderness %></td>
+        <td><%= entry.breast_fullness %></td>
+        <td><%= entry.alcohol %></td>
+        <td><%= entry.cramps %></td>
+        <td><%= entry.exercise %></td>
+        <td><%= entry.travel %></td>
+        <td><%= entry.ibuprofen %></td>
+        <td><%= entry.tylenol %></td>
+        <td><%= entry.multivitamin %></td>
+        <td><%= entry.notes %></td>
+        <td><%= link_to 'Show', entry %></td>
+        <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+        <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Entry', new_entry_path %>

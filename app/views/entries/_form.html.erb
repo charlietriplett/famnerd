@@ -1,0 +1,113 @@
+<%= form_for(@entry) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :recorded_at %><br>
+    <%= f.datetime_select :recorded_at %>
+  </div>
+  <div class="field">
+    <%= f.label :temperature %><br>
+    <%= f.text_field :temperature %>
+  </div>
+  <div class="field">
+    <%= f.label :disturbed %><br>
+    <%= f.check_box :disturbed %>
+  </div>
+  <div class="field">
+    <%= f.label :intercourse %><br>
+    <%= f.check_box :intercourse %>
+  </div>
+  <div class="field">
+    <%= f.label :protected %><br>
+    <%= f.check_box :protected %>
+  </div>
+  <div class="field">
+    <%= f.label :cervix_firmness %><br>
+    <%= f.text_field :cervix_firmness %>
+  </div>
+  <div class="field">
+    <%= f.label :cervix_height %><br>
+    <%= f.text_field :cervix_height %>
+  </div>
+  <div class="field">
+    <%= f.label :cirvix_openness %><br>
+    <%= f.text_field :cirvix_openness %>
+  </div>
+  <div class="field">
+    <%= f.label :flow_type %><br>
+    <%= f.text_field :flow_type %>
+  </div>
+  <div class="field">
+    <%= f.label :flow_volume %><br>
+    <%= f.number_field :flow_volume %>
+  </div>
+  <div class="field">
+    <%= f.label :ferning %><br>
+    <%= f.text_field :ferning %>
+  </div>
+  <div class="field">
+    <%= f.label :opk %><br>
+    <%= f.text_field :opk %>
+  </div>
+  <div class="field">
+    <%= f.label :pregancy_test %><br>
+    <%= f.text_field :pregancy_test %>
+  </div>
+  <div class="field">
+    <%= f.label :ovulatory_pain %><br>
+    <%= f.check_box :ovulatory_pain %>
+  </div>
+  <div class="field">
+    <%= f.label :breast_tenderness %><br>
+    <%= f.check_box :breast_tenderness %>
+  </div>
+  <div class="field">
+    <%= f.label :breast_fullness %><br>
+    <%= f.check_box :breast_fullness %>
+  </div>
+  <div class="field">
+    <%= f.label :alcohol %><br>
+    <%= f.check_box :alcohol %>
+  </div>
+  <div class="field">
+    <%= f.label :cramps %><br>
+    <%= f.check_box :cramps %>
+  </div>
+  <div class="field">
+    <%= f.label :exercise %><br>
+    <%= f.check_box :exercise %>
+  </div>
+  <div class="field">
+    <%= f.label :travel %><br>
+    <%= f.check_box :travel %>
+  </div>
+  <div class="field">
+    <%= f.label :ibuprofen %><br>
+    <%= f.check_box :ibuprofen %>
+  </div>
+  <div class="field">
+    <%= f.label :tylenol %><br>
+    <%= f.check_box :tylenol %>
+  </div>
+  <div class="field">
+    <%= f.label :multivitamin %><br>
+    <%= f.check_box :multivitamin %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

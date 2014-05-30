@@ -1,0 +1,53 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recorded_at: 2014-05-30 01:48:39
+  temperature: 1.5
+  disturbed: false
+  intercourse: false
+  protected: false
+  cervix_firmness: MyString
+  cervix_height: MyString
+  cirvix_openness: MyString
+  flow_type: MyString
+  flow_volume: 1
+  ferning: MyString
+  opk: MyString
+  pregancy_test: MyString
+  ovulatory_pain: false
+  breast_tenderness: false
+  breast_fullness: false
+  alcohol: false
+  cramps: false
+  exercise: false
+  travel: false
+  ibuprofen: false
+  tylenol: false
+  multivitamin: false
+  notes: MyText
+
+two:
+  recorded_at: 2014-05-30 01:48:39
+  temperature: 1.5
+  disturbed: false
+  intercourse: false
+  protected: false
+  cervix_firmness: MyString
+  cervix_height: MyString
+  cirvix_openness: MyString
+  flow_type: MyString
+  flow_volume: 1
+  ferning: MyString
+  opk: MyString
+  pregancy_test: MyString
+  ovulatory_pain: false
+  breast_tenderness: false
+  breast_fullness: false
+  alcohol: false
+  cramps: false
+  exercise: false
+  travel: false
+  ibuprofen: false
+  tylenol: false
+  multivitamin: false
+  notes: MyText
