@@ -1,7 +1,8 @@
 class CreateEntries < ActiveRecord::Migration
   def change
     create_table :entries do |t|
-      t.datetime :recorded_at
+      t.date :recorded_at_date
+      t.time :recorded_at_time
       t.float :temperature
       t.boolean :disturbed
       t.boolean :intercourse

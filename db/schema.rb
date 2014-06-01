@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530020010) do
+ActiveRecord::Schema.define(version: 20140601024937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "entries", force: true do |t|
-    t.datetime "recorded_at"
+    t.date     "recorded_at_date"
+    t.time     "recorded_at_time"
     t.float    "temperature"
     t.boolean  "disturbed"
     t.boolean  "intercourse"
@@ -44,7 +45,10 @@ ActiveRecord::Schema.define(version: 20140530020010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "manual_time"
   end
+
+  add_index "entries", ["user_id", "recorded_at_date"], name: "index_entries_on_user_id_and_recorded_at_date", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -60,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140530020010) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.time     "default_time"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

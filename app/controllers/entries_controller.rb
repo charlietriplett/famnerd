@@ -15,8 +15,12 @@ class EntriesController < ApplicationController
   # GET /entries/new
   def new
     @entry = current_user.entries.new
+    @entry.recorded_at_time = current_user.default_time
+    @entry.temperature = "98.6"
   end
 
+ 
+  
   # GET /entries/1/edit
   def edit
   end
@@ -69,6 +73,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:recorded_at, :temperature, :disturbed, :intercourse, :protected, :cervix_firmness, :cervix_height, :cirvix_openness, :flow_type, :flow_volume, :ferning, :opk, :pregancy_test, :ovulatory_pain, :breast_tenderness, :breast_fullness, :alcohol, :cramps, :exercise, :travel, :ibuprofen, :tylenol, :multivitamin, :notes, :user_id)
+      params.require(:entry).permit(:recorded_at_date, :recorded_at_time, :default_time, :temperature, :disturbed, :intercourse, :protected, :cervix_firmness, :cervix_height, :cirvix_openness, :flow_type, :flow_volume, :ferning, :opk, :pregancy_test, :ovulatory_pain, :breast_tenderness, :breast_fullness, :alcohol, :cramps, :exercise, :travel, :ibuprofen, :tylenol, :multivitamin, :notes, :user_id)
     end
 end
