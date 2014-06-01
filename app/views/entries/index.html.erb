@@ -14,7 +14,7 @@ $(function () {
             type: "datetime"
         },
         yAxis: {
-          minorTickInterval: 'auto',
+          minTickInterval: 0.1,
           title: {
                 text: 'Scale'
             }
@@ -40,19 +40,31 @@ $(function () {
           name: 'Temperatures',
           pointInverval: <%= 1.day * 1000 %>, 
           pointStart: <%= 4.weeks.ago.to_i * 1000 %>,
-          data: <%= (4.weeks.ago.to_date..Date.today).map { |date| Entry.temperature(date).to_f }.inspect %>,
-          marker: {
+          data: [
+          <% @entries.each do |entry| %>
+            <%= entry.temperature %>,
+          <% end %>
+          ],
+            marker: {
             lineWidth: 4,
             lineColor: Highcharts.getOptions().colors[7],
             fillColor: 'red'
             }
         },{
-          type: 'column',
-          name: 'Intercourse',
+          type: 'line',
+          name: 'Cover Line',
+          color: '#FF0000',
           pointInverval: <%= 1.day * 1000 %>, 
           pointStart: <%= 4.weeks.ago.to_i * 1000 %>,
-          data: <%= (4.weeks.ago.to_date..Date.today).map { |date| Entry.id(date).to_i }.inspect %>,
-        }
+          data: [
+          <% @entries.each do |entry| %>
+            <%= entry.cover_line %>,
+          <% end %>
+          ],
+            marker: {
+              enabled: false
+            }
+        }          
         ]
     }); end // highcharts
 }); // end function
@@ -94,7 +106,7 @@ $(function () {
   <tbody>
     <% @entries.each do |entry| %>
       <tr>
-        <td><%= entry.recorded_at_time.strftime("%H:%M") %> | <%= entry.recorded_at_date %> </td>
+        <td><%= entry.recorded_at_time.strftime("%H:%M") %> | <%= entry.recorded_at_date.strftime("%d %b") %> </td>
         <td><%= entry.temperature %></td>
         <td><%= entry.disturbed %></td>
         <td><%= entry.intercourse %></td>
