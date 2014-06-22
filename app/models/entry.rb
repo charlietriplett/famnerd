@@ -10,12 +10,23 @@ class Entry < ActiveRecord::Base
 
   #adds up all of the values for this day
   def self.temperature(date)
-    where("date(recorded_at_date) =?", date ).sum(:temperature)
+    where("date(recorded_at_date) =?", date ).get(:temperature)
   end
-  
+    
   def cover_line
-    cover_line = Entry.where(recorded_at_date: 6.days.ago..Time.now).maximum(:temperature)
+    cover_line = Entry.maximum(:temperature)
     cover_line + 0.1
   end
+
+  def intercourse_int
+    if intercourse == true
+      98.2
+    else
+      0
+    end
+  end
+  
+
+
   
 end

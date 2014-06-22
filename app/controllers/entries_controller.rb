@@ -5,6 +5,10 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = current_user.entries
+
+    @current_cycle = Entry.where(recorded_at_date: 30.days.ago..Time.now, flow_type: 'medium')
+
+    
   end
 
   # GET /entries/1

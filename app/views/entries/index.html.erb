@@ -5,67 +5,93 @@
 <script type="text/javascript" charset="utf-8">
 $(function () { 
     $('#entries_chart').highcharts({
- 
+      chart: {
+        plotBackgroundColor: '#eee',
+      },
+      title: {
+        text: 'Stuff per Entry'
+      },
+      xAxis: {
+        opposite: true,
+        alternateGridColor: '#f5f5f5',
+        tickInterval: 1,
+        categories: <%= @entries.count  %>,
+        //gridLineColor: '#f4f4f4',
+        // gridLineWidth: '4%',
+        // later we'll use plotBand to highlight other columns
+      },
+      yAxis: [{
+        tickInterval: .1,
+        lineWidth: 1,
+        maxPadding: 0.3,
         title: {
-            text: 'Stuff per Entry'
+          text: null 
         },
-        xAxis: {
-          minorTickInterval: 'auto',
-            type: "datetime"
+      },{ // Values for opposite side of Y Axis
+        opposite: true,
+        title: {
+          text: null 
         },
-        yAxis: {
-          minTickInterval: 0.1,
-          title: {
-                text: 'Scale'
-            }
-        },
-        tooltip: {
-          backgroundColor: '#FCFFC5',
-          borderColor: 'black',
-          borderRadius: 10,
-          borderWidth: 3,
-          crosshairs:
-          [{
-                width: '5%',
-                color: '#f4f4f4',
-                shared: true,
-            }],
-          formatter: function() {
-            return Highcharts.numberFormat(this.y, 1) +  '°';
-          }
-        },
-        series: [
-          {
+        tickInterval: .1,
+        lineWidth: 1,
+        linkedTo: 0,
+      }], // end yAxis
+      tooltip: {
+        backgroundColor: '#f4f4f4',
+        borderColor: '#ffffff',
+        borderRadius: 10,
+        borderWidth: 2,
+        crosshairs: [{
+          width: '4%',
+          color: '#ccc',
+          shared: true,
+        }],
+        formatter: function() {
+          return Highcharts.numberFormat(this.y, 1) +  '°' + this.series.name;
+        }
+      },
+      
+      series: [
+        {
           type: 'line',
           name: 'Temperatures',
-          pointInverval: <%= 1.day * 1000 %>, 
-          pointStart: <%= 4.weeks.ago.to_i * 1000 %>,
-          data: [
-          <% @entries.each do |entry| %>
-            <%= entry.temperature %>,
-          <% end %>
-          ],
-            marker: {
-            lineWidth: 4,
+          pointInverval: <%= 1.day * 1000 %>,
+          lineWidth: 6,
+          color: '#777777',
+          data: <%= @entries.map(&:temperature).to_json %>,
+          marker: {
+            // may be possible to shift marker http://jsfiddle.net/8Sgzg/7/
             lineColor: Highcharts.getOptions().colors[7],
-            fillColor: 'red'
-            }
-        },{
+            fillColor: '#222222',
+            radius: 8,
+          },
+      },{
           type: 'line',
+          yAxis: 1,
+          lineWidth: 1,
           name: 'Cover Line',
           color: '#FF0000',
           pointInverval: <%= 1.day * 1000 %>, 
-          pointStart: <%= 4.weeks.ago.to_i * 1000 %>,
-          data: [
-          <% @entries.each do |entry| %>
-            <%= entry.cover_line %>,
-          <% end %>
-          ],
-            marker: {
-              enabled: false
-            }
+          data: <%= @entries.map(&:cover_line).to_json %>,
+          marker: {
+            enabled: false
+          }
+        },{
+          type: 'column',
+          yAxis: 1,
+          lineWidth: 1,
+          name: 'Intercourse',
+          color: '#FF0000',
+          pointInverval: <%= 1.day * 1000 %>, 
+          data: <%= @entries.map(&:intercourse_int).to_json %>,
+          marker: {
+            enabled: false,
+                                symbol: 'url(http://www.highcharts.com/demo/gfx/sun.png)'
+
+          }
         }          
-        ]
+      ]
+
     }); end // highcharts
 }); // end function
 </script>
@@ -77,6 +103,7 @@ $(function () {
     <tr>
       <th>Recorded at</th>
       <th>Temperature</th>
+      <th>Coverline</th>
       <th>Disturbed</th>
       <th>Intercourse</th>
       <th>Protected</th>
@@ -108,8 +135,9 @@ $(function () {
       <tr>
         <td><%= entry.recorded_at_time.strftime("%H:%M") %> | <%= entry.recorded_at_date.strftime("%d %b") %> </td>
         <td><%= entry.temperature %></td>
+        <td><%= entry.cover_line %></td>
         <td><%= entry.disturbed %></td>
-        <td><%= entry.intercourse %></td>
+        <td><%= entry.intercourse_int %></td>
         <td><%= entry.protected %></td>
         <td><%= entry.cervix_firmness %></td>
         <td><%= entry.cervix_height %></td>
@@ -136,4 +164,8 @@ $(function () {
       </tr>
     <% end %>
   </tbody>
+  
 </table>
+
+<h2>Cycles</h2>
+
